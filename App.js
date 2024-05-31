@@ -15,6 +15,19 @@ export default function App() {
         </View>
       </View>
 
+      <View style={styles.searchFilterContainer}>
+        <Icon name="search" style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchBar}
+          placeholder='Search'
+          placeholderTextColor='black'         
+          keyboardType='text'
+        />
+        <View style={styles.filterContainer}>
+        <Icon name="sliders" style={styles.filterIcon} />
+        </View>
+      </View>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -25,8 +38,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0e2d3',
     flex: 1,
     paddingTop: 40,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
 
   welcomeMessageContainer: {
@@ -56,5 +69,44 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 25,
   },
+
+  searchFilterContainer:{
+    height: 40,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
+  searchBar:{
+    backgroundColor: 'white',
+    width: 260,
+    borderRadius: 10,
+    paddingLeft: 35,
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+
+  searchIcon:{
+    fontSize: 18,
+    position: 'absolute',
+    left: 10,
+    top: 10,
+    zIndex: 1,
+  },
+
+  filterContainer: {
+    width: 40,
+    borderRadius: 10,
+    backgroundColor: '#f3775b',
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  filterIcon:{
+    color: 'white',
+    fontSize: 30,
+  }
+
 
 });
