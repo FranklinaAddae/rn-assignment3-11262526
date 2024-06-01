@@ -1,8 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, FlatList, } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function App() {
+const App = () => {
+
+  const ongoingTasksData = [
+    { id: '1', title: 'Mobile App Development' },
+    { id: '2', title: 'Web Development' },
+    { id: '3', title: 'UI/UX Design' },
+    { id: '4', title: 'Database Management' },
+    { id: '5', title: 'API Integration' },
+    { id: '6', title: 'Testing and Debugging' },
+    { id: '7', title: 'Project Planning' },
+    { id: '8', title: 'Team Collaboration' },
+    { id: '9', title: 'Code Review' },
+    { id: '10', title: 'DevOps' },
+    { id: '11', title: 'Security Analysis' },
+    { id: '12', title: 'Performance Optimization' },
+    { id: '13', title: 'Client Communication' },
+    { id: '14', title: 'Documentation' },
+    { id: '15', title: 'Research and Development' },
+  ];
+
+  const renderItem = ({ item }) => (
+    <View style={styles.task}>
+      <Text style={styles.taskTitle}>{item.title}</Text>
+    </View>
+  );
 
   const categoriesData = [
     { title: 'Exercise', tasks: 12, categoryImage: require('./photos/exercise-icon.png') },
@@ -15,8 +39,6 @@ export default function App() {
     { title: 'Meditate', tasks: 12, categoryImage: require('./photos/meditate-icon.webp') },
     { title: 'Read', tasks: 12, categoryImage: require('./photos/read-icon.webp') },
     { title: 'Art', tasks: 12, categoryImage: require('./photos/art-icon.png') },
-
-
   ];
 
   return (
@@ -44,9 +66,9 @@ export default function App() {
         </View>
       </View>
 
-      <Text style={styles.categoriesTitle}>Categories</Text>
+      <Text style={styles.sectionTitle}>Categories</Text>
 
-      <View >
+      <View style={styles.categoriesSection}>
         <ScrollView horizontal={true} style={styles.categoriesContainer}>
           {categoriesData.map((category, index) => (
             <View key={index} style={styles.category}>
@@ -59,6 +81,14 @@ export default function App() {
           ))}
         </ScrollView>
       </View>
+      
+      <Text style={styles.sectionTitle}>Ongoing Task</Text>
+      <FlatList
+        data={ongoingTasksData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+      />
 
       <StatusBar style="auto" />
     </View>
@@ -142,11 +172,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 
-  categoriesTitle:{
+  sectionTitle:{
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'serif',
     marginBottom: 10,
+  },
+
+
+  categoriesSection:{
+    marginBottom: 20,
   },
 
   categoriesContainer: {
@@ -186,6 +221,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 140,
     width: 140,
-  }
+  },
+
+  task: {
+    backgroundColor: '#f0f0f0',
+    display: 'flex',
+    justifyContent: 'center',
+    height: 130,
+
+    padding: 16,
+    borderRadius: 15,
+    marginBottom: 16,
+  },
+
+  taskTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
 
 });
+
+export default App;
