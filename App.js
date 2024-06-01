@@ -1,8 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function App() {
+
+  const categoriesData = [
+    { title: 'Exercise', tasks: 12, categoryImage: require('./photos/exercise-icon.png') },
+    { title: 'Study', tasks: 12, categoryImage: require('./photos/study-icon.webp') },
+    { title: 'Code', tasks: 12, categoryImage: require('./photos/coding-icon.webp') },
+    { title: 'Travel', tasks: 12, categoryImage: require('./photos/travel-icon.png') },
+    { title: 'Cook', tasks: 12, categoryImage: require('./photos/cook-icon.webp') },
+    { title: 'Music', tasks: 12, categoryImage: require('./photos/music-icon.webp') },
+    { title: 'Gardening', tasks: 12, categoryImage: require('./photos/gardening-icon.png') },
+    { title: 'Meditate', tasks: 12, categoryImage: require('./photos/meditate-icon.webp') },
+    { title: 'Read', tasks: 12, categoryImage: require('./photos/read-icon.webp') },
+    { title: 'Art', tasks: 12, categoryImage: require('./photos/art-icon.png') },
+
+
+  ];
+
   return (
     <View style={styles.container}>
       <View style={styles.userInfoContainer}>
@@ -11,7 +27,7 @@ export default function App() {
           <Text style={styles.smallText}>14 tasks today</Text>
         </View>
         <View style={styles.userIconContainer}>
-          <Image style={styles.userIcon} source={require('./assets/user-icon.jpg')} />
+          <Image style={styles.userIcon} source={require('./photos/user-icon.jpg')} />
         </View>
       </View>
 
@@ -28,8 +44,25 @@ export default function App() {
         </View>
       </View>
 
+      <Text style={styles.categoriesTitle}>Categories</Text>
+
+      <View >
+        <ScrollView horizontal={true} style={styles.categoriesContainer}>
+          {categoriesData.map((category, index) => (
+            <View key={index} style={styles.category}>
+              <Text style={styles.title}>{category.title}</Text>
+              <Text style={styles.tasks}>{category.tasks} Tasks</Text>
+              <View  style={styles.categoryImage}>
+                  <Image style={styles.categoryIcons} source={category.categoryImage}/>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+
       <StatusBar style="auto" />
     </View>
+
   );
 }
 
@@ -74,7 +107,8 @@ const styles = StyleSheet.create({
     height: 40,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 20,
   },
 
   searchBar:{
@@ -106,7 +140,52 @@ const styles = StyleSheet.create({
   filterIcon:{
     color: 'white',
     fontSize: 30,
-  }
+  },
 
+  categoriesTitle:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'serif',
+    marginBottom: 10,
+  },
+
+  categoriesContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    
+  },
+
+  category:{
+    marginRight: 20,
+    height: 190,
+    width: 180,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    paddingTop: 10,
+  },
+
+  title:{
+    fontWeight: 'bold',
+    marginLeft: 20,
+    fontSize: 15,
+  },
+
+  tasks:{
+    marginLeft: 20,
+    fontSize: 10,
+  },
+
+  categoryImage:{
+    height: 120,
+    width: 130,
+    marginLeft: 20,
+
+  },
+
+  categoryIcons:{
+    backgroundColor: 'white',
+    height: 140,
+    width: 140,
+  }
 
 });
